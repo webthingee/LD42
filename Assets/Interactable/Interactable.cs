@@ -8,7 +8,11 @@ public class Interactable : MonoBehaviour
     public float interactionSpeed = 1f;
     
     [SerializeField] private float completionValue;
+    public PercentageUI percentageUI;
+    
     private IEnumerator interactableInUse;
+    private IEnumerator degradeOverTime;
+
 
     public float CompletionValue
     {
@@ -37,10 +41,13 @@ public class Interactable : MonoBehaviour
     protected virtual void Awake()
     {
         interactableInUse = InteractableInUse();
+        degradeOverTime = DegradeOverTime();
     }
 
     protected virtual void Update()
     {
+        VisualCompletion();
+        
         if (inAction && Input.GetButton("Jump"))
         {
             StartCoroutine(interactableInUse); 
@@ -51,6 +58,17 @@ public class Interactable : MonoBehaviour
         }
     }
 
+    protected virtual void VisualCompletion()
+    {
+        if (CompletionValue >= 0f)
+        {
+            StartCoroutine(degradeOverTime);
+        }
+        
+        if (!(CompletionValue >= 0.95f)) return;
+        StopCoroutine(degradeOverTime);
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         inAction = true;
@@ -66,6 +84,18 @@ public class Interactable : MonoBehaviour
         while (true)
         {
             Debug.Log(gameObject.name + " is in use by Interactable Object.");
+            yield return new WaitForSeconds(interactionSpeed);
+        }
+    }
+    
+    protected virtual IEnumerator DegradeOverTime()
+    {
+        while (true)
+        {
+            CompletionValue -= 0.001f * Time.deltaTime;
+            if (percentageUI)
+                percentageUI.ChangeValue(CompletionValue);
+            
             yield return new WaitForSeconds(interactionSpeed);
         }
     }

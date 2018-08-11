@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Lever : Interactable
 {
+	//public PercentageUI percentageUI;
 	private SpriteRenderer spriteRenderer;
 
 	protected override void Awake()
@@ -16,6 +17,7 @@ public class Lever : Interactable
 		base.Update();
 		spriteRenderer.color = AllLeaksPatched() ? Color.green : Color.red;
 		FindObjectOfType<DebugTextOnscreen>().ChangeDebugText("");
+		//percentageUI.ChangeValue(CompletionValue);
 	}
 	
 	private bool AllLeaksPatched()
@@ -40,15 +42,15 @@ public class Lever : Interactable
 			if (!AllLeaksPatched())
 			{
 				string txt = "HALT! Not All Leaks Are Patched!";
-				Debug.Log(txt);
 				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
 				yield return new WaitForSeconds(interactionSpeed);
 			}
 			else
 			{
 				string txt = "We're going UP!!!";
-				Debug.Log(txt);
 				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
+				CompletionValue += 0.01f * Time.deltaTime;
+				percentageUI.ChangeValue(CompletionValue);
 				yield return new WaitForSeconds(interactionSpeed);
 			}
 		}

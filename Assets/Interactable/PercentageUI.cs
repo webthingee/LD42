@@ -8,15 +8,19 @@ public class PercentageUI : MonoBehaviour
 	private void Awake()
 	{
 		forgroundImage = GetComponent<Image>();
-		forgroundImage.fillAmount = 0;
 	}
 
-	private void OnEnable()
-	{
-		GetComponentInParent<Leak>().OnCompletionChange += Leak_OnCompletionChange;
-	}
-
-	private void Leak_OnCompletionChange(float f)
+//	private void OnEnable()
+//	{
+//		GetComponentInParent<Leak>().OnCompletionChange += Leak_OnCompletionChange;
+//	}
+//
+//	private void Leak_OnCompletionChange(float f)
+//	{
+//		forgroundImage.fillAmount = f;
+//	}
+	
+	public void ChangeValue(float f)
 	{
 		forgroundImage.fillAmount = f;
 	}

@@ -228,6 +228,7 @@ MonoBehaviour:
   isComplete: 0
   interactionSpeed: 1
   completionValue: 0
+  percentageUI: {fileID: 114323726465300752}
 --- !u!212 &212043820569938740
 SpriteRenderer:
   m_ObjectHideFlags: 1
