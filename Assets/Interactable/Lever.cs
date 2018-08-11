@@ -17,7 +17,16 @@ public class Lever : Interactable
 		base.Update();
 		spriteRenderer.color = AllLeaksPatched() ? Color.green : Color.red;
 		FindObjectOfType<DebugTextOnscreen>().ChangeDebugText("");
-		//percentageUI.ChangeValue(CompletionValue);
+
+		if (CompletionValue <= 0)
+		{
+			Debug.Log("FAIL");		
+		}
+		
+		if (CompletionValue >= 1)
+		{
+			Debug.Log("WIN");		
+		}
 	}
 	
 	private bool AllLeaksPatched()
@@ -36,7 +45,7 @@ public class Lever : Interactable
 	}
 	
 	protected override IEnumerator InteractableInUse()
-	{
+	{	
 		while (true)
 		{
 			if (!AllLeaksPatched())
@@ -47,6 +56,7 @@ public class Lever : Interactable
 			}
 			else
 			{
+				StopCoroutine(degradeOverTime);
 				string txt = "We're going UP!!!";
 				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
 				CompletionValue += 0.01f * Time.deltaTime;

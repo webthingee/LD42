@@ -11,7 +11,7 @@ public class Interactable : MonoBehaviour
     public PercentageUI percentageUI;
     
     private IEnumerator interactableInUse;
-    private IEnumerator degradeOverTime;
+    protected IEnumerator degradeOverTime;
 
 
     public float CompletionValue
@@ -83,7 +83,7 @@ public class Interactable : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(gameObject.name + " is in use by Interactable Object.");
+            StopCoroutine(degradeOverTime);
             yield return new WaitForSeconds(interactionSpeed);
         }
     }
