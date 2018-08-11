@@ -12,7 +12,6 @@ public class DebugTextOnscreen : MonoBehaviour
 
 	public void ChangeDebugText(string text)
 	{
-		Debug.Log(text);
 		debugText.text = text;
 	}
 }
