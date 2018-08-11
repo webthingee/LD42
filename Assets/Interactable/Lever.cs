@@ -15,7 +15,6 @@ public class Lever : Interactable
 	{
 		base.Update();
 		spriteRenderer.color = AllLeaksPatched() ? Color.green : Color.red;
-		FindObjectOfType<DebugTextOnscreen>().ChangeDebugText("");
 
 		if (CompletionValue <= 0)
 		{
@@ -50,15 +49,12 @@ public class Lever : Interactable
 		{
 			if (!AllLeaksPatched())
 			{
-				string txt = "HALT! Not All Leaks Are Patched!";
-				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
 				yield return new WaitForSeconds(rateOfIncrease);
 			}
 			else
 			{
 				StopCoroutine(degradeOverTime);
-				string txt = "We're going UP!!!";
-				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
+
 				CompletionValue += positiveIncrease * Time.deltaTime;
 				percentageUI.ChangeValue(CompletionValue);
 				yield return new WaitForSeconds(rateOfIncrease);

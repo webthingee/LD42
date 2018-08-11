@@ -4,12 +4,34 @@ using UnityEngine;
 
 public class Leak : Interactable
 {    
+    public AudioEvent blowtorch;
+
+    private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
 
     protected override void Awake()
     {
         base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (Input.GetButtonUp("Jump") && audioSource != null)
+        {
+            audioSource.Stop();
+            audioSource = null;
+        }
+
+        if (Input.GetButtonDown("Jump") && inAction || isComplete)
+        {
+            if (audioSource == null) 
+                audioSource = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+
+            audioSource.loop = true;
+            blowtorch.Play(audioSource);
+        }
     }
 
     protected override void VisualCompletion()
@@ -38,10 +60,11 @@ public class Leak : Interactable
     }
     
     protected override IEnumerator InteractableInUse()
-    {
+    {   
         while (true)
         {
             StopCoroutine(degradeOverTime);
+            
             CompletionValue += positiveIncrease * Time.deltaTime;
             percentageUI.ChangeValue(CompletionValue);
             yield return new WaitForSeconds(rateOfIncrease);

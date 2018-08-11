@@ -226,12 +226,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positiveIncrease: 0.1
   rateOfIncrease: 1
-  negitiveIncrease: 0.001
+  negitiveIncrease: 0.0025
   rateOfDecrease: 1
   inAction: 0
   isComplete: 0
   completionValue: 0
   percentageUI: {fileID: 114323726465300752}
+  blowtorch: {fileID: 11400000, guid: 115406bb10fa1456288362ec877d9d09, type: 2}
 --- !u!212 &212043820569938740
 SpriteRenderer:
   m_ObjectHideFlags: 1

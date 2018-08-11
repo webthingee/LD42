@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -11,15 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace7397e0ac4d41c8afae089aa6f26fd, type: 3}
   m_Name: FootStepRandom
   m_EditorClassIdentifier: 
+  audioType: 0
   clips:
   - {fileID: 8300000, guid: 554d5807a303e465193869e4d58aa952, type: 3}
-  volumeAdjust:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: c5c68b914227042e68bae4b0ed4cc3e4, type: 2}
-  volume:
-    minValue: 0.5
-    maxValue: 0.60294116
-  pitch:
-    minValue: 0.9117647
-    maxValue: 1.0882354
+  volumeMin: 0.5
+  volumeMax: 0.51
+  pitchMin: 1
+  pitchMax: 1.1

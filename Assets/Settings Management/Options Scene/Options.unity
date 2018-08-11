@@ -249,7 +249,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1412963449}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &209601565
 GameObject:
@@ -1338,7 +1338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fb4a72c454bf086f1d678f45143a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScene: Game
+  gameScene: SampleScene
   optionsScene: Options
   musicVolumeSlider: {fileID: 409627998}
   sfxVolumeSlider: {fileID: 989195360}
@@ -1700,7 +1700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1412963449
 Transform:
   m_ObjectHideFlags: 0
@@ -1711,7 +1711,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2101814626}
   - {fileID: 167567954}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2341,8 +2340,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1412963449}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2101814627
 MonoBehaviour:
