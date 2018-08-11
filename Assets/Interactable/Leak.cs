@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Leak : Interactable
 {
+    public Action<float> OnCompletionChange = delegate { };
+    
     private SpriteRenderer spriteRenderer;
     private IEnumerator degradeOverTime;
 
@@ -49,6 +52,7 @@ public class Leak : Interactable
         while (true)
         {
             CompletionValue += 0.1f * Time.deltaTime;
+            OnCompletionChange(CompletionValue);
             Debug.Log(gameObject.name + " is in use. at " + CompletionValue);
             yield return new WaitForSeconds(interactionSpeed);
         }
@@ -58,7 +62,8 @@ public class Leak : Interactable
     {
         while (true)
         {
-            CompletionValue -= 0.01f * Time.deltaTime;
+            CompletionValue -= 0.005f * Time.deltaTime;
+            OnCompletionChange(CompletionValue);
             Debug.Log(gameObject.name + " is in use. at " + CompletionValue);
             yield return new WaitForSeconds(interactionSpeed);
         }
