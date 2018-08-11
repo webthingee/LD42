@@ -13,6 +13,7 @@ public class PlayerMovement : CharacterMovement
     [SerializeField] private bool ignoreOneWays;
     [SerializeField] private float lastY;
     [SerializeField] private float currentY;
+    public bool underWater;
 
     protected override void Update() 
     {
@@ -50,7 +51,23 @@ public class PlayerMovement : CharacterMovement
         //// Grounded
         if (isGrounded)
         {
-            moveDirection.y = 0;      
+            moveDirection.y = 0; 
+        }
+
+        if (!isGrounded && !isClimbing)
+        {
+            moveDirection.x = 0;
+        }
+
+        if (underWater)
+        {
+            isGrounded = false;
+            stopGravity = true;
+            moveDirection.y = climbAxis * (speed / 5f);
+            moveDirection.x = Input.GetAxisRaw("Horizontal");
+            moveDirection.x *= speed / 4f;
+            moveDirection.y += gravity / 1.5f * Time.deltaTime;
+            
         }
     }
 
@@ -68,7 +85,7 @@ public class PlayerMovement : CharacterMovement
     private bool IntersectsWithLadder(LayerMask llayermask)
     {
         if (Physics2D.CircleCast((Vector2)transform.position + Vector2.down * 0.55f, 0.1f, Vector3.forward, 0f, llayermask)) return true;
-        if (Physics2D.CircleCast((Vector2)transform.position + Vector2.down * 0.55f, 0.1f, Vector3.forward, 0f, llayermask)) return true;
+        //if (Physics2D.CircleCast((Vector2)transform.position + Vector2.down * 0.55f, 0.1f, Vector3.forward, 0f, llayermask)) return true;
         return false;
     }
 }

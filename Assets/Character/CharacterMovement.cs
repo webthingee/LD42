@@ -15,6 +15,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] protected bool isGrounded;
     [SerializeField] protected float climbAxis;
     [SerializeField] protected bool stopGravity;
+    protected bool isAbove;
     protected bool isRight;
     protected bool isLeft;
     protected Vector3 moveDirection = Vector3.zero;
@@ -49,6 +50,7 @@ public class CharacterMovement : MonoBehaviour
 
         //// Check if we are on the ground
         isGrounded = flags.below;
+        //isAbove = flags.above;
         isRight = flags.right;
         isLeft = flags.left;
     }

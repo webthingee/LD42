@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Lever : Interactable
 {
-	//public PercentageUI percentageUI;
 	private SpriteRenderer spriteRenderer;
 
 	protected override void Awake()
@@ -20,12 +19,14 @@ public class Lever : Interactable
 
 		if (CompletionValue <= 0)
 		{
-			Debug.Log("FAIL");		
+			Debug.Log("FAIL");
+			FindObjectOfType<LevelManager>().LoseCanvas();
 		}
 		
 		if (CompletionValue >= 1)
 		{
 			Debug.Log("WIN");		
+			FindObjectOfType<LevelManager>().WinCanvas();
 		}
 	}
 	
