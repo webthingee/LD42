@@ -8,7 +8,7 @@ public class Water : MonoBehaviour
 
 		if (pm != null)
 		{
-			pm.underWater = true;
+			pm.isUnderWater = true;
 		}
 	}
 	
@@ -18,7 +18,7 @@ public class Water : MonoBehaviour
 
 		if (pm != null)
 		{
-			pm.underWater = false;
+			pm.isUnderWater = false;
 		}
 	}
 }

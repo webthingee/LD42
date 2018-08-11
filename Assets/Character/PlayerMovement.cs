@@ -13,7 +13,7 @@ public class PlayerMovement : CharacterMovement
     [SerializeField] private bool ignoreOneWays;
     [SerializeField] private float lastY;
     [SerializeField] private float currentY;
-    public bool underWater;
+    public bool isUnderWater;
 
     protected override void Update() 
     {
@@ -59,7 +59,7 @@ public class PlayerMovement : CharacterMovement
             moveDirection.x = 0;
         }
 
-        if (underWater)
+        if (isUnderWater)
         {
             isGrounded = false;
             stopGravity = true;
@@ -67,7 +67,6 @@ public class PlayerMovement : CharacterMovement
             moveDirection.x = Input.GetAxisRaw("Horizontal");
             moveDirection.x *= speed / 4f;
             moveDirection.y += gravity / 1.5f * Time.deltaTime;
-            
         }
     }
 
