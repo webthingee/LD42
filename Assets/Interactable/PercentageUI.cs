@@ -18,7 +18,6 @@ public class PercentageUI : MonoBehaviour
 
 	private void Leak_OnCompletionChange(float f)
 	{
-		Debug.Log(f);
 		forgroundImage.fillAmount = f;
 	}
 }

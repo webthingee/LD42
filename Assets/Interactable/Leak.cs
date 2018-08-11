@@ -53,7 +53,6 @@ public class Leak : Interactable
         {
             CompletionValue += 0.1f * Time.deltaTime;
             OnCompletionChange(CompletionValue);
-            Debug.Log(gameObject.name + " is in use. at " + CompletionValue);
             yield return new WaitForSeconds(interactionSpeed);
         }
     }
@@ -62,11 +61,12 @@ public class Leak : Interactable
     {
         while (true)
         {
-            CompletionValue -= 0.005f * Time.deltaTime;
+            CompletionValue -= 0.001f * Time.deltaTime;
             OnCompletionChange(CompletionValue);
-            Debug.Log(gameObject.name + " is in use. at " + CompletionValue);
             yield return new WaitForSeconds(interactionSpeed);
         }
     }
+    
+    
 
 }

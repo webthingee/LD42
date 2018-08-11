@@ -1,15 +1,30 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Lever : Interactable 
+public class Lever : Interactable
 {
+	private SpriteRenderer spriteRenderer;
+
+	protected override void Awake()
+	{
+		base.Awake();
+		spriteRenderer = GetComponent<SpriteRenderer>();
+	}
+
+	protected override void Update()
+	{
+		base.Update();
+		spriteRenderer.color = AllLeaksPatched() ? Color.green : Color.red;
+		FindObjectOfType<DebugTextOnscreen>().ChangeDebugText("");
+	}
+	
 	private bool AllLeaksPatched()
 	{
 		Leak[] leaks = FindObjectsOfType<Leak>();
 
 		foreach (Leak leak in leaks)
 		{
-			if (leak.isComplete != true)
+			if (leak.CompletionValue <= 0.1f)
 			{
 				return false;
 			}
@@ -24,12 +39,16 @@ public class Lever : Interactable
 		{
 			if (!AllLeaksPatched())
 			{
-				Debug.Log("Not All Leaks Are Patched!");
+				string txt = "HALT! Not All Leaks Are Patched!";
+				Debug.Log(txt);
+				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
 				yield return new WaitForSeconds(interactionSpeed);
 			}
 			else
 			{
-				Debug.Log(gameObject.name + " is in use.");
+				string txt = "We're going UP!!!";
+				Debug.Log(txt);
+				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
 				yield return new WaitForSeconds(interactionSpeed);
 			}
 		}
