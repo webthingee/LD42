@@ -41,7 +41,6 @@ public class Lever : Interactable
 				return false;
 			}
 		}
-
 		return true;
 	}
 	
@@ -53,16 +52,16 @@ public class Lever : Interactable
 			{
 				string txt = "HALT! Not All Leaks Are Patched!";
 				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
-				yield return new WaitForSeconds(interactionSpeed);
+				yield return new WaitForSeconds(rateOfIncrease);
 			}
 			else
 			{
 				StopCoroutine(degradeOverTime);
 				string txt = "We're going UP!!!";
 				FindObjectOfType<DebugTextOnscreen>().ChangeDebugText(txt);
-				CompletionValue += 0.01f * Time.deltaTime;
+				CompletionValue += positiveIncrease * Time.deltaTime;
 				percentageUI.ChangeValue(CompletionValue);
-				yield return new WaitForSeconds(interactionSpeed);
+				yield return new WaitForSeconds(rateOfIncrease);
 			}
 		}
 	}

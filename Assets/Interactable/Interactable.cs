@@ -3,16 +3,19 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    [Range(0.01f, 1f)] public float positiveIncrease = 0.1f;
+    public float rateOfIncrease = 1f;
+    [Range(0.001f, 1f)] public float negitiveIncrease = 0.01f;
+    public float rateOfDecrease = 1f;
+    
     public bool inAction;
     public bool isComplete;
-    public float interactionSpeed = 1f;
     
     [SerializeField] private float completionValue;
     public PercentageUI percentageUI;
     
     private IEnumerator interactableInUse;
     protected IEnumerator degradeOverTime;
-
 
     public float CompletionValue
     {
@@ -65,7 +68,7 @@ public class Interactable : MonoBehaviour
             StartCoroutine(degradeOverTime);
         }
         
-        if (!(CompletionValue >= 0.95f)) return;
+        if (!(CompletionValue >= 0.99f)) return;
         StopCoroutine(degradeOverTime);
     }
     
@@ -84,7 +87,7 @@ public class Interactable : MonoBehaviour
         while (true)
         {
             StopCoroutine(degradeOverTime);
-            yield return new WaitForSeconds(interactionSpeed);
+            yield return new WaitForSeconds(1f);
         }
     }
     
@@ -92,11 +95,11 @@ public class Interactable : MonoBehaviour
     {
         while (true)
         {
-            CompletionValue -= 0.001f * Time.deltaTime;
+            CompletionValue -= negitiveIncrease * Time.deltaTime;
             if (percentageUI)
                 percentageUI.ChangeValue(CompletionValue);
             
-            yield return new WaitForSeconds(interactionSpeed);
+            yield return new WaitForSeconds(rateOfDecrease);
         }
     }
 }

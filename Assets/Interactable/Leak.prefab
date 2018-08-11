@@ -224,9 +224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20da093eae624600b8a7a810e85534d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positiveIncrease: 0.1
+  rateOfIncrease: 1
+  negitiveIncrease: 0.001
+  rateOfDecrease: 1
   inAction: 0
   isComplete: 0
-  interactionSpeed: 1
   completionValue: 0
   percentageUI: {fileID: 114323726465300752}
 --- !u!212 &212043820569938740
