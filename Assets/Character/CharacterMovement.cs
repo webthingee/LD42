@@ -9,16 +9,11 @@ public class CharacterMovement : MonoBehaviour
 {
     [Header("Character Movement Settings")]
     public float speed = 12.0f;
-    public float jumpSpeed = 24.0f;
-    public float doubleJumpSpeed = 24.0f;
     public float gravity = 36.0f;
 
     [Header("Character Movement Variables")]
     [SerializeField] protected bool isGrounded;
     [SerializeField] protected float climbAxis;
-    [SerializeField] protected bool isJumping;
-    [SerializeField] protected bool jumpAvailable;
-    [SerializeField] protected bool canDoubleJump;
     [SerializeField] protected bool stopGravity;
     protected bool isRight;
     protected bool isLeft;
@@ -56,12 +51,5 @@ public class CharacterMovement : MonoBehaviour
         isGrounded = flags.below;
         isRight = flags.right;
         isLeft = flags.left;
-
-        //// Check if we hit our head
-        // if (flags.above)
-        // {
-        //     moveDirection.y -= gravity * Time.deltaTime;
-        //     moveDirection.x = 0;
-        // }
     }
 }

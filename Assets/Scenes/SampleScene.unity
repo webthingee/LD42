@@ -1141,8 +1141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
-  jumpSpeed: 24
-  doubleJumpSpeed: 24
+  jumpSpeed: 0
+  doubleJumpSpeed: 0
   gravity: 36
   isGrounded: 0
   climbAxis: 0

@@ -41,7 +41,7 @@ public class Interactable : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (inAction && Input.GetButton("Fire2"))
+        if (inAction && Input.GetButton("Jump"))
         {
             StartCoroutine(interactableInUse); 
         }

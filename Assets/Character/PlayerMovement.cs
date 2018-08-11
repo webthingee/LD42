@@ -27,18 +27,8 @@ public class PlayerMovement : CharacterMovement
     {
         if (bumpUp)
         {
-            moveDirection.y = doubleJumpSpeed;
+            //moveDirection.y = doubleJumpSpeed;
             bumpUp = false;
-        }
-
-        //// Jump : Double Jump
-        if (canDoubleJump && Input.GetButtonDown("Jump")) // ?? not sure this even works?
-        {
-            if (canDoubleJump)
-            {
-                moveDirection.y = doubleJumpSpeed;
-                canDoubleJump = false;
-            }
         }
 
         //// Ladder Climb
@@ -60,32 +50,7 @@ public class PlayerMovement : CharacterMovement
         //// Grounded
         if (isGrounded)
         {
-            moveDirection.y = 0;
-            isJumping = false;
-        
-            //// Jump
-            if (jumpAvailable && Input.GetAxisRaw("Jump") != 0)
-            {
-                //moveDirection.y = 0;
-                isClimbing = false;
-                moveDirection.y = jumpSpeed;
-                canDoubleJump = true;
-                isJumping = true;
-                jumpAvailable = false;
-            }
-            if (Input.GetAxisRaw("Jump") == 0)
-            {
-                jumpAvailable = true;
-            }
-        }
-        
-        //// Jump : Hold for full height
-        if (Input.GetButtonUp("Jump"))
-        {
-            if (moveDirection.y > 0)
-            {
-                moveDirection.y = moveDirection.y * 0.5f;
-            }
+            moveDirection.y = 0;      
         }
     }
 
