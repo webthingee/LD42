@@ -9,10 +9,13 @@ public class PlayerAnimation : MonoBehaviour
 
 	public AudioEvent footstep;
 	public float stepSpeed;
-	AudioSource sm;
+	public AudioSource sm;
 	public bool walking;
 	IEnumerator walkingSounds;
-        
+
+	public float previousPosition;
+	[SerializeField] private bool hasFootsteps;
+
 	void Awake ()
 	{
 		characterMovement = GetComponent<CharacterMovement>();
@@ -28,8 +31,8 @@ public class PlayerAnimation : MonoBehaviour
 		// animator.SetFloat("Forward", Mathf.Abs(characterMovement.GetMoveDirection.x));
 		//anim.SetFloat("Looking", yAxis);
 
-		walking = Mathf.Abs(characterMovement.GetMoveDirection.x) > 0 ? true : false;
-		if (walking)
+		//walking = Mathf.Abs(characterMovement.GetMoveDirection.x) > 0 ? true : false;
+		if (walking && characterMovement.isGrounded)
 		{
 			StartWalking();
 		}
@@ -37,6 +40,13 @@ public class PlayerAnimation : MonoBehaviour
 		{
 			StopWalking();
 		}
+
+		previousPosition = transform.position.x;
+	}
+
+	private void LateUpdate()
+	{
+		walking = previousPosition != transform.position.x;
 	}
 
 	void ChangeDirection (float fdirection)
@@ -48,25 +58,34 @@ public class PlayerAnimation : MonoBehaviour
 
 	public void StartWalking ()
 	{
-		if (!sm)
+		if (sm == null)
 		{
 			sm = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+		}
+
+		if (!hasFootsteps)
+		{
+			hasFootsteps = true;
 			StartCoroutine(walkingSounds);
 		}
+		
 	}
     
 	public void StopWalking ()
 	{
 		StopCoroutine(walkingSounds);
-		sm = null;
+		hasFootsteps = false;
 	}
 
 	IEnumerator WalkingSounds ()
 	{		
 		while (true)
 		{
+			hasFootsteps = true;
+			
 			footstep.Play(sm);
 			yield return new WaitForSeconds(stepSpeed);
+			sm.Stop();
 		}
 	}
 }

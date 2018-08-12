@@ -12,7 +12,7 @@ public class CharacterMovement : MonoBehaviour
     public float gravity = 36.0f;
 
     [Header("Character Movement Variables")]
-    [SerializeField] protected bool isGrounded;
+    [SerializeField] public bool isGrounded;
     [SerializeField] protected float climbAxis;
     [SerializeField] protected bool stopGravity;
     protected bool isAbove;

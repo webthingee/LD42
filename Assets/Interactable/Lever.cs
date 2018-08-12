@@ -18,13 +18,11 @@ public class Lever : Interactable
 
 		if (CompletionValue <= 0)
 		{
-			Debug.Log("FAIL");
 			FindObjectOfType<LevelManager>().LoseCanvas();
 		}
 		
 		if (CompletionValue >= 1)
 		{
-			Debug.Log("WIN");		
 			FindObjectOfType<LevelManager>().WinCanvas();
 		}
 	}
