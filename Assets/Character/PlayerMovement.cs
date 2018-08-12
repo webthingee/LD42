@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Prime31;
+using Debug = UnityEngine.Debug;
 
 public class PlayerMovement : CharacterMovement 
 {	
@@ -33,7 +34,11 @@ public class PlayerMovement : CharacterMovement
             ignoreOneWays = false;
             isClimbing = false;
         }
-        if (ignoreOneWays) GetComponent<CharacterController2D>().ignoreOneWayPlatformsThisFrame = true;
+
+        if (ignoreOneWays)
+        {
+            GetComponent<CharacterController2D>().ignoreOneWayPlatformsThisFrame = true;
+        }
 
         //// Gravity Conditional Checks
         stopGravity = StopGravityConditions();
