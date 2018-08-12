@@ -58,11 +58,6 @@ public class PlayerAnimation : MonoBehaviour
 
 	public void StartWalking ()
 	{
-		if (sm == null)
-		{
-			sm = FindObjectOfType<SoundManager>().GetOpenAudioSource();
-		}
-
 		if (!hasFootsteps)
 		{
 			hasFootsteps = true;
@@ -73,7 +68,9 @@ public class PlayerAnimation : MonoBehaviour
     
 	public void StopWalking ()
 	{
+		if (sm != null) sm.Stop();
 		StopCoroutine(walkingSounds);
+		if (sm != null) sm = null;
 		hasFootsteps = false;
 	}
 
@@ -83,9 +80,14 @@ public class PlayerAnimation : MonoBehaviour
 		{
 			hasFootsteps = true;
 			
+			if (sm == null)
+			{
+				sm = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+			}
+			
 			footstep.Play(sm);
 			yield return new WaitForSeconds(stepSpeed);
-			sm.Stop();
+
 		}
 	}
 }
