@@ -33,11 +33,13 @@ public class PlayerMovement : CharacterMovement
         {
             ignoreOneWays = false;
             isClimbing = false;
+            GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
         }
 
         if (ignoreOneWays)
         {
             GetComponent<CharacterController2D>().ignoreOneWayPlatformsThisFrame = true;
+            GetComponentInChildren<SpriteRenderer>().sortingOrder = -3;
         }
 
         //// Gravity Conditional Checks
