@@ -16,6 +16,7 @@ public class Interactable : MonoBehaviour
     
     private IEnumerator interactableInUse;
     protected IEnumerator degradeOverTime;
+    public bool isPaused;
 
     public float CompletionValue
     {
@@ -63,13 +64,17 @@ public class Interactable : MonoBehaviour
 
     protected virtual void VisualCompletion()
     {
-        if (CompletionValue >= 0f)
+        if (CompletionValue >= 0f && !isPaused)
         {
             StartCoroutine(degradeOverTime);
         }
+        else
+        {
+            StopCoroutine(degradeOverTime);
+        }
         
-        if (!(CompletionValue >= 0.99f)) return;
-        StopCoroutine(degradeOverTime);
+        //if (!(CompletionValue >= 0.99f)) return;
+        //StopCoroutine(degradeOverTime);
     }
     
     private void OnTriggerEnter2D(Collider2D other)

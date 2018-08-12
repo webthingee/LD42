@@ -14,6 +14,9 @@ public class Lever : Interactable
 	protected override void Update()
 	{
 		base.Update();
+		
+		isPaused = AllLeaksPatched();
+		
 		spriteRenderer.color = AllLeaksPatched() ? Color.green : Color.red;
 
 		if (CompletionValue <= 0)
@@ -51,10 +54,9 @@ public class Lever : Interactable
 			}
 			else
 			{
-				StopCoroutine(degradeOverTime);
+				//StopCoroutine(degradeOverTime);
 
 				CompletionValue += positiveIncrease * Time.deltaTime;
-				percentageUI.ChangeValue(CompletionValue);
 				yield return new WaitForSeconds(rateOfIncrease);
 			}
 		}

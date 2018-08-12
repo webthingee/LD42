@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Water : MonoBehaviour 
+public class Water : MonoBehaviour
 {
 	private void OnTriggerEnter2D(Collider2D other)
 	{

@@ -17,6 +17,17 @@ public class LevelManager : MonoBehaviour
 		loseCanvas.SetActive(false);
 	}
 
+	private void Update()
+	{
+		if (winCanvas.activeSelf || loseCanvas.activeSelf)
+		{
+			if (Input.GetButtonDown("Jump"))
+			{
+				Restart();
+			}
+		}
+	}
+
 	public void WinCanvas()
 	{
 		Time.timeScale = 0;

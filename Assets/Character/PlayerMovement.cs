@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Prime31;
 
 public class PlayerMovement : CharacterMovement 
 {	
-    [Header("Player Movement Variables")]
+    [Header("Player Movement DeBug")]
     public bool isClimbing;
-    public bool bumpUp;
-    
-    [SerializeField] private bool ignoreOneWays;
-    [SerializeField] private float lastY;
-    [SerializeField] private float currentY;
     public bool isUnderWater;
 
+    [SerializeField] private bool ignoreOneWays;
+    [SerializeField] private float waterPenaltyX;
+    [SerializeField] private float waterPenaltyY;
+    
     protected override void Update() 
     {
         climbAxis = Input.GetAxis("Vertical");
@@ -26,12 +22,6 @@ public class PlayerMovement : CharacterMovement
 
     private void MoveCharacter()
     {
-        if (bumpUp)
-        {
-            //moveDirection.y = doubleJumpSpeed;
-            bumpUp = false;
-        }
-
         //// Ladder Climb
         if (IntersectsWithLadder(1 << LayerMask.NameToLayer("Ladder")))
         {
@@ -59,13 +49,14 @@ public class PlayerMovement : CharacterMovement
             moveDirection.x = 0;
         }
 
+        //// Underwater
         if (isUnderWater)
         {
             isGrounded = false;
             stopGravity = true;
-            moveDirection.y = climbAxis * (speed / 5f);
+            moveDirection.y = climbAxis * (speed / waterPenaltyY);
             moveDirection.x = Input.GetAxisRaw("Horizontal");
-            moveDirection.x *= speed / 4f;
+            moveDirection.x *= speed / waterPenaltyX;
             moveDirection.y += gravity / 1.5f * Time.deltaTime;
         }
     }
