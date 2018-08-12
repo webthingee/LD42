@@ -3,13 +3,10 @@ using UnityEngine;
 
 public class Lever : Interactable
 {
-	private SpriteRenderer spriteRenderer;
-
-	protected override void Awake()
-	{
-		base.Awake();
-		spriteRenderer = GetComponent<SpriteRenderer>();
-	}
+	public SpriteRenderer blinkIndicator;
+	public SpriteRenderer leverHandle;
+	public Sprite leverOn;
+	public Sprite leverOff;
 
 	protected override void Update()
 	{
@@ -17,7 +14,7 @@ public class Lever : Interactable
 		
 		isPaused = AllLeaksPatched();
 		
-		spriteRenderer.color = AllLeaksPatched() ? Color.green : Color.red;
+		blinkIndicator.color = AllLeaksPatched() ? Color.green : Color.red;
 
 		if (CompletionValue <= 0)
 		{
@@ -27,6 +24,16 @@ public class Lever : Interactable
 		if (CompletionValue >= 1)
 		{
 			FindObjectOfType<LevelManager>().WinCanvas();
+		}
+		
+		if (Input.GetButtonUp("Jump") || !inAction )
+		{
+//			if (audioSource == null) 
+//				audioSource = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+//
+//			audioSource.loop = true;
+//			blowtorch.Play(audioSource);
+			leverHandle.GetComponent<SpriteRenderer>().sprite = leverOff;
 		}
 	}
 	
@@ -55,8 +62,9 @@ public class Lever : Interactable
 			else
 			{
 				//StopCoroutine(degradeOverTime);
-
+				leverHandle.GetComponent<SpriteRenderer>().sprite = leverOn;
 				CompletionValue += positiveIncrease * Time.deltaTime;
+				percentageUI.ChangeValue(CompletionValue);
 				yield return new WaitForSeconds(rateOfIncrease);
 			}
 		}
