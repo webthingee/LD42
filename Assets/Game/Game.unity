@@ -2580,7 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eac29832c9ae4c219ae1815f1f69c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSpawnRoutine: 0
+  isSpawnRoutine: 1
   leakSpawnMin: 10
   leakSpawnMax: 40
   winCanvas: {fileID: 2845255}
