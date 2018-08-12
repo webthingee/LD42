@@ -21,9 +21,9 @@ public class LeakSpawner : MonoBehaviour
 
 	private void Start()
 	{
-		GameObject[] leakSpots = GameObject.FindGameObjectsWithTag("LeakSpot");
+		LeakPoint[] leakSpots = FindObjectsOfType<LeakPoint>();
 
-		foreach (GameObject spot in leakSpots)
+		foreach (LeakPoint spot in leakSpots)
 		{
 			leakPositions.Add(spot.transform);
 		}
