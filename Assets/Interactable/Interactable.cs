@@ -17,6 +17,8 @@ public class Interactable : MonoBehaviour
     private IEnumerator interactableInUse;
     protected IEnumerator degradeOverTime;
     public bool isPaused;
+    [SerializeField] private float timeOccured;
+    [SerializeField] private float timeInterval = 10f;
 
     public float CompletionValue
     {
@@ -27,6 +29,12 @@ public class Interactable : MonoBehaviour
             if (completionValue >= 1f)
             {
                 completionValue = 1f;
+
+                if (!isComplete)
+                {
+                    timeOccured = Time.time;
+                }
+                
                 isComplete = true;
             }
 
@@ -60,8 +68,26 @@ public class Interactable : MonoBehaviour
         {
             StopCoroutine(interactableInUse);
         }
+
+        if (isComplete)
+        {
+            CompletionHold();
+        }
     }
 
+    private void CompletionHold()
+    {
+        if (TimeCheck())
+        {
+            isComplete = false;
+        }
+    }
+    
+    public bool TimeCheck()
+    {
+        return timeOccured + timeInterval < Time.time;
+    }
+    
     protected virtual void VisualCompletion()
     {
         if (CompletionValue >= 0f && !isPaused)
@@ -79,12 +105,13 @@ public class Interactable : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        inAction = true;
+        if (other.CompareTag(tag))
+            inAction = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        inAction = false;
+        if (inAction && other.CompareTag(tag)) inAction = false;
     }
 
     protected virtual IEnumerator InteractableInUse()
@@ -100,7 +127,8 @@ public class Interactable : MonoBehaviour
     {
         while (true)
         {
-            CompletionValue -= negitiveIncrease * Time.deltaTime;
+            if (!isComplete)
+                CompletionValue -= negitiveIncrease * Time.deltaTime;
             if (percentageUI)
                 percentageUI.ChangeValue(CompletionValue);
             

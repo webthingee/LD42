@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour 
 {
 	public GameObject character;
-	//Animator animator;
+	Animator animator;
 	private CharacterMovement characterMovement;
 
 	public AudioEvent footstep;
@@ -15,11 +15,13 @@ public class PlayerAnimation : MonoBehaviour
 
 	public float previousPosition;
 	[SerializeField] private bool hasFootsteps;
+	private PlayerMovement playerMovement;
 
 	private void Awake()
 	{
 		characterMovement = GetComponent<CharacterMovement>();
-		//animator = GetComponentInChildren<Animator>();
+		playerMovement = GetComponent<PlayerMovement>();
+		animator = GetComponentInChildren<Animator>();
 		walkingSounds = WalkingSounds();      
 	}
 
@@ -28,7 +30,8 @@ public class PlayerAnimation : MonoBehaviour
 		//float yAxis = Input.GetAxis("Vertical");
 		ChangeDirection(characterMovement.GetMoveDirection.x);
 
-		// animator.SetFloat("Forward", Mathf.Abs(characterMovement.GetMoveDirection.x));
+		animator.SetFloat("Forward", Mathf.Abs(characterMovement.GetMoveDirection.x));
+		animator.SetBool("IsClimbing", ClimbCheck());
 		//anim.SetFloat("Looking", yAxis);
 
 		if (walking && characterMovement.isGrounded)
@@ -48,6 +51,11 @@ public class PlayerAnimation : MonoBehaviour
 		walking = previousPosition != transform.position.x;
 	}
 
+	private bool ClimbCheck()
+	{
+		return playerMovement.isClimbing && characterMovement.GetMoveDirection != Vector3.zero;
+	}
+	
 	void ChangeDirection (float fdirection)
 	{        
 		if (fdirection > 0) character.transform.eulerAngles = new Vector3(0, 0, 0);
