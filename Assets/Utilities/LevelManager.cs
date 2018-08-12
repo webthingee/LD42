@@ -26,6 +26,11 @@ public class LevelManager : MonoBehaviour
 				Restart();
 			}
 		}
+
+		if (Input.GetKeyDown(KeyCode.N))
+		{
+			Restart();
+		}
 	}
 
 	public void WinCanvas()

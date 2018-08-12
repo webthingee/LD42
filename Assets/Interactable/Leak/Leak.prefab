@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4869527070461052}
   - component: {fileID: 212043820569938740}
   - component: {fileID: 58298785669674706}
-  - component: {fileID: 114391937560135814}
   - component: {fileID: 95595305258834060}
+  - component: {fileID: 114391937560135814}
   m_Layer: 0
   m_Name: Leak
   m_TagString: LeakSpot
@@ -90,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1359012814488244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.925325, y: -1.3055166, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224670528977324138}
@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 0
+  m_FillMethod: 0
+  m_FillAmount: 0.633
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!114 &114286916746725998
@@ -253,7 +253,7 @@ MonoBehaviour:
   percentageUI: {fileID: 114323726465300752}
   isPaused: 0
   timeOccured: 0
-  timeInterval: 10
+  timeInterval: 60
 --- !u!212 &212043820569938740
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -369,7 +369,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224910728196594592
 RectTransform:
@@ -388,5 +388,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
