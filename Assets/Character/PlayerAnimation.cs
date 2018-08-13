@@ -16,6 +16,13 @@ public class PlayerAnimation : MonoBehaviour
 	public float previousPosition;
 	[SerializeField] private bool hasFootsteps;
 	private PlayerMovement playerMovement;
+	
+	public AudioEvent climbingSound;
+	[SerializeField] private bool hasClimbingSound;
+	private IEnumerator climbingSounds;
+	private AudioSource sm2;
+
+
 
 	private void Awake()
 	{
@@ -23,6 +30,7 @@ public class PlayerAnimation : MonoBehaviour
 		playerMovement = GetComponent<PlayerMovement>();
 		animator = GetComponentInChildren<Animator>();
 		walkingSounds = WalkingSounds();      
+		climbingSounds = ClimbingSounds();      
 	}
 
 	private void Update ()
@@ -34,13 +42,22 @@ public class PlayerAnimation : MonoBehaviour
 		animator.SetBool("IsClimbing", ClimbCheck());
 		//anim.SetFloat("Looking", yAxis);
 
-		if (walking && characterMovement.isGrounded)
+		if (walking && (characterMovement.isGrounded || playerMovement.isClimbing))
 		{
 			StartWalking();
 		}
 		else
 		{
 			StopWalking();
+		}
+		
+		if (playerMovement.isClimbing && Input.GetAxis("Vertical") != 0)
+		{
+			StartClimbing();
+		}
+		else
+		{
+			StopClimbing();
 		}
 
 		previousPosition = transform.position.x;
@@ -94,6 +111,42 @@ public class PlayerAnimation : MonoBehaviour
 			}
 			
 			footstep.Play(sm);
+			yield return new WaitForSeconds(stepSpeed);
+		}
+	}
+	
+	private void StartClimbing ()
+	{
+		if (hasClimbingSound) return;
+		hasClimbingSound = true;
+		StartCoroutine(climbingSounds);
+	}
+
+	private void StopClimbing ()
+	{
+		StopCoroutine(climbingSounds);
+		
+		if (sm2 != null)
+		{
+			sm2.Stop();
+			sm2 = null;
+		}
+		
+		hasClimbingSound = false;
+	}
+	
+	private IEnumerator ClimbingSounds ()
+	{		
+		while (true)
+		{
+			hasClimbingSound = true;
+			
+			if (sm2 == null)
+			{
+				sm2 = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+			}
+			
+			climbingSound.Play(sm2);
 			yield return new WaitForSeconds(stepSpeed);
 		}
 	}
