@@ -3278,7 +3278,7 @@ GameObject:
   m_Layer: 8
   m_Name: Torch
   m_TagString: LeakSpot
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4424,6 +4424,11 @@ Prefab:
       propertyPath: percentageUI
       value: 
       objectReference: {fileID: 159918701}
+    - target: {fileID: 114786941663134942, guid: 8cac147bb64944010962c3223183d4f9,
+        type: 2}
+      propertyPath: propAnimator
+      value: 
+      objectReference: {fileID: 1337297656}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cac147bb64944010962c3223183d4f9, type: 2}
   m_IsPrefabAsset: 0

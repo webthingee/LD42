@@ -256,6 +256,8 @@ MonoBehaviour:
   isPaused: 0
   timeOccured: 0
   timeInterval: 60
+  gushingPlaying: 0
+  gushingSound: {fileID: 11400000, guid: 3eaade066745f4939b0eb2ae032493fc, type: 2}
 --- !u!212 &212043820569938740
 SpriteRenderer:
   m_ObjectHideFlags: 1

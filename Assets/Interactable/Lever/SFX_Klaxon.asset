@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a967d2aaceb1b4697b8ed61fe5dd6c94, type: 3}
-  m_Name: SFX_LeverRelease
+  m_Name: SFX_Klaxon
   m_EditorClassIdentifier: 
   audioType: 0
-  clip: {fileID: 8300000, guid: dda03aff6a9b049ceabb3664f8cac11e, type: 3}
-  volume: 0.25
+  clip: {fileID: 8300000, guid: 281c4747734cf4289bbd1bc51b3d1524, type: 3}
+  volume: 0.15
   pitch: 1

@@ -61,7 +61,6 @@ public class Lever : Interactable
 			{
 				klaxPlaying = true;
 				audioSource = FindObjectOfType<SoundManager>().GetOpenAudioSource();
-				audioSource.loop = true;
 				klaxSound.Play(audioSource, true);
 			}
 
