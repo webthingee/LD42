@@ -5183,11 +5183,6 @@ Prefab:
       propertyPath: propAnimator
       value: 
       objectReference: {fileID: 1337297656}
-    - target: {fileID: 114786941663134942, guid: 8cac147bb64944010962c3223183d4f9,
-        type: 2}
-      propertyPath: completionValue
-      value: 0.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cac147bb64944010962c3223183d4f9, type: 2}
   m_IsPrefabAsset: 0
