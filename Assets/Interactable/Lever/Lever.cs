@@ -9,8 +9,14 @@ public class Lever : Interactable
 	public Sprite leverOff;
 	public AudioEvent holdingLeverSound;
 	public AudioEvent releasingLeverSound;
-	
+	public AudioEvent klaxSound;
+
+
+	public Animator propAnimator;
+
+	private AudioSource audioSource;
 	[SerializeField] private bool isHoldingLever;
+	[SerializeField] private bool klaxPlaying;
 
 	protected override void Update()
 	{
@@ -39,6 +45,36 @@ public class Lever : Interactable
 			FindObjectOfType<LevelManager>().WinCanvas();
 		}
 
+
+		if (isHoldingLever && AllLeaksPatched())
+		{
+			propAnimator.enabled = isHoldingLever;
+		}
+		else
+		{
+			propAnimator.enabled = false;
+		}
+		
+		if (CompletionValue <= 0.2f)
+		{
+			if (CompletionValue >= 0.01f && !klaxPlaying)
+			{
+				klaxPlaying = true;
+				audioSource = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+				audioSource.loop = true;
+				klaxSound.Play(audioSource, true);
+			}
+
+			if (CompletionValue <= 0.05f)
+			{
+				if (klaxPlaying)
+				{
+					audioSource.Stop();
+					klaxPlaying = false;
+				}
+			}
+		}
+		
 		if (Input.GetButtonDown("Jump") && inAction && AllLeaksPatched())
 		{
 			if (!isHoldingLever)

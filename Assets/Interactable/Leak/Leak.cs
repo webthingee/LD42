@@ -24,9 +24,9 @@ public class Leak : Interactable
         FindObjectOfType<CamShake>().shakeDuration = 0.3f;
     }
 
-    protected override void VisualCompletion()
+    protected override void CompletionTracking()
     {
-        base.VisualCompletion();
+        base.CompletionTracking();
         
         animator.SetFloat("PatchPower", CompletionValue);
     }

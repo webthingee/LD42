@@ -21,7 +21,6 @@ public class OptionsSceneLoader : MonoBehaviour
 
 	private void Update()
 	{
-		// ReSharper disable once InvertIf
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			if (!optionSceneLoaded)
@@ -37,7 +36,6 @@ public class OptionsSceneLoader : MonoBehaviour
 				optionSceneLoaded = false;
 				Time.timeScale = 1;
 				FindObjectOfType<LevelManager>().gamePaused = false;
-
 			}
 		}
 	}

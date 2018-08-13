@@ -166,7 +166,10 @@ MonoBehaviour:
   holdingLeverSound: {fileID: 11400000, guid: 507f4947b0b8e444aac4f737098f5b36, type: 2}
   releasingLeverSound: {fileID: 11400000, guid: cf7146826bd9c47ffbd80280452c6895,
     type: 2}
+  klaxSound: {fileID: 11400000, guid: ccf5e6ef76d754a369fb0ad1a77a8eef, type: 2}
+  propAnimator: {fileID: 0}
   isHoldingLever: 0
+  klaxPlaying: 0
 --- !u!212 &212529110802791308
 SpriteRenderer:
   m_ObjectHideFlags: 1

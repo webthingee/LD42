@@ -71,7 +71,7 @@ public class Interactable : MonoBehaviour
 
     protected virtual void Update()
     {
-        VisualCompletion();
+        CompletionTracking();
         
         if (inAction && Input.GetButton("Jump"))
         {
@@ -101,7 +101,7 @@ public class Interactable : MonoBehaviour
         return timeOccured + timeInterval < Time.time;
     }
     
-    protected virtual void VisualCompletion()
+    protected virtual void CompletionTracking()
     {
         if (CompletionValue >= 0f && !isPaused)
         {

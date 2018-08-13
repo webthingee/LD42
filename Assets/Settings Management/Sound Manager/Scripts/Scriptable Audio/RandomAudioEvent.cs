@@ -12,7 +12,7 @@ public class RandomAudioEvent : AudioEvent
 	[Range(0.1f, 1.9f)] public float pitchMin = 1.0f;
 	[Range(0.11f, 2f)] public float pitchMax = 1.1f;
 
-	public override void Play(AudioSource source)
+	public override void Play(AudioSource source, bool canLoop = false)
 	{
 		if (clips.Length == 0) return;
 

@@ -40,16 +40,22 @@ public class LevelManager : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
 			Application.Quit();
+			
 			#if UNITY_EDITOR
 				UnityEditor.EditorApplication.isPlaying = false;
 			#endif
+			
+			// WebGL won't close, load Main
+			SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
 		}
 	}
 
 	public void WinCanvas()
 	{
 		winCanvas.SetActive(true);
-		winSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+		var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+		aud.loop = false;
+		winSound.Play(aud);
 		GetComponent<TriggerMusic>().Stop();
 		Time.timeScale = 0;
 	}
@@ -57,7 +63,9 @@ public class LevelManager : MonoBehaviour
 	public void LoseCanvas()
 	{
 		loseCanvas.SetActive(true);
-		loseSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+		var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+		aud.loop = false;
+		loseSound.Play(aud);
 		GetComponent<TriggerMusic>().Stop();
 		Time.timeScale = 0;
 	}

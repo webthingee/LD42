@@ -7,11 +7,11 @@ public class MusicAudioEvent : AudioEvent
 	[Range(0,1)] public float volume = 1;
     public bool loop = true;
 
-    public override void Play (AudioSource source)
+    public override void Play (AudioSource source, bool canLoop = false)
 	{
 		source.clip = clip;
 		source.volume = volume * AdjustVolume(audioType);
-		source.loop = loop;
+		source.loop = canLoop;
 		source.Play();		
 	}
 
