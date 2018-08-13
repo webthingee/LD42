@@ -8,7 +8,7 @@ public class TriggerMusic : MonoBehaviour
 	public void Start()
 	{
 		audioSource = SoundManager.instance.GetOpenAudioSource();
-		audioEvent.Play(audioSource);
+		audioEvent.Play(audioSource, true);
 		SoundManager.instance.OnMuiscVolumeChange += SoundManager_OnMusicVolumeChange;
 	}
 

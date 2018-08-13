@@ -52,22 +52,28 @@ public class LevelManager : MonoBehaviour
 
 	public void WinCanvas()
 	{
-		winCanvas.SetActive(true);
-		var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
-		aud.loop = false;
-		winSound.Play(aud);
-		GetComponent<TriggerMusic>().Stop();
-		Time.timeScale = 0;
+		if (!winCanvas.activeSelf)
+		{
+			winCanvas.SetActive(true);
+			var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+			aud.loop = false;
+			winSound.Play(aud);
+			GetComponent<TriggerMusic>().Stop();
+			Time.timeScale = 0;
+		}
 	}
 	
 	public void LoseCanvas()
 	{
-		loseCanvas.SetActive(true);
-		var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
-		aud.loop = false;
-		loseSound.Play(aud);
-		GetComponent<TriggerMusic>().Stop();
-		Time.timeScale = 0;
+		if (!loseCanvas.activeSelf)
+		{
+			loseCanvas.SetActive(true);
+			var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+			aud.loop = false;
+			loseSound.Play(aud);
+			GetComponent<TriggerMusic>().Stop();
+			Time.timeScale = 0;
+		}
 	}
 
 	public void Restart()
