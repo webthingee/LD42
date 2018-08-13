@@ -13,6 +13,11 @@ public class LeakSpawner : MonoBehaviour
 	[Header("Debug")]
 	[SerializeField] private float lastSpawn;
 
+	[SerializeField] private int leakCount;
+	
+	public bool firstCompleteSay;
+
+
 	private void Awake()
 	{
 		levelManager = FindObjectOfType<LevelManager>();
@@ -65,5 +70,27 @@ public class LeakSpawner : MonoBehaviour
 		GameObject leak = Instantiate(leakPrefab, leakPositions[randomLeak].position, Quaternion.identity);
 		usedLeakPositions.Add(leakPositions[randomLeak]);
 		leak.name = "leak";
+
+		if (leakCount <= 0)
+		{
+			FindObjectOfType<DialogManager>().DialogSayThis("Ah, a leak! Gotta pactch that quick!", 5f);
+		}
+
+		if (leakCount == 2)
+		{
+			FindObjectOfType<DialogManager>().DialogSayThis("Oh no, Another?!?!", 5f);
+		}
+		
+		if (leakCount == 4)
+		{
+			FindObjectOfType<DialogManager>().DialogSayThis("I got this!", 5f);
+		}
+		
+		if (leakCount == 6)
+		{
+			FindObjectOfType<DialogManager>().DialogSayThis("This is outa control!", 5f);
+		}
+		
+		leakCount++;
 	}
 }

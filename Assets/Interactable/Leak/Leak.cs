@@ -31,6 +31,12 @@ public class Leak : Interactable
     protected override void CompletionTracking()
     {
         base.CompletionTracking();
+
+        if (isComplete && !FindObjectOfType<LeakSpawner>().firstCompleteSay)
+        {
+            FindObjectOfType<DialogManager>().DialogSayThis("Quick! Gotta pull the lever before something else goes wrong.", 5f);
+            FindObjectOfType<LeakSpawner>().firstCompleteSay = true;
+        }
         
         if (CompletionValue <= 0.25f && CompletionValue >= 0f)
         {

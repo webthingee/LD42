@@ -22,6 +22,11 @@ public class LevelManager : MonoBehaviour
 		loseCanvas.SetActive(false);
 	}
 
+	private void Start()
+	{
+		FindObjectOfType<DialogManager>().DialogSayThis("That lever will get the engine going as long as we don't get any leaks!", 10f);
+	}
+
 	private void Update()
 	{
 		if (winCanvas.activeSelf || loseCanvas.activeSelf)
