@@ -59,6 +59,7 @@ public class LevelManager : MonoBehaviour
 			aud.loop = false;
 			winSound.Play(aud);
 			GetComponent<TriggerMusic>().Stop();
+			gamePaused = true;
 			Time.timeScale = 0;
 		}
 	}
@@ -72,6 +73,7 @@ public class LevelManager : MonoBehaviour
 			aud.loop = false;
 			loseSound.Play(aud);
 			GetComponent<TriggerMusic>().Stop();
+			gamePaused = true;
 			Time.timeScale = 0;
 		}
 	}

@@ -76,7 +76,7 @@ public class Lever : Interactable
 		
 		if (Input.GetButtonDown("Jump") && inAction && AllLeaksPatched())
 		{
-			if (!isHoldingLever)
+			if (!isHoldingLever && !FindObjectOfType<LevelManager>().gamePaused)
 			{
 				var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
 				aud.loop = false;
@@ -88,7 +88,7 @@ public class Lever : Interactable
 		if (Input.GetButtonUp("Jump") || !inAction )
 		{
 			leverHandle.GetComponent<SpriteRenderer>().sprite = leverOff;
-			if (isHoldingLever)
+			if (isHoldingLever && !FindObjectOfType<LevelManager>().gamePaused)
 			{
 				releasingLeverSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
 			}

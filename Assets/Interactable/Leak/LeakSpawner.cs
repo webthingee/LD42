@@ -50,6 +50,8 @@ public class LeakSpawner : MonoBehaviour
 	public void SpawnLeak()
 	{
 		if (!TimeCheck()) return;
+		if (FindObjectOfType<LevelManager>().gamePaused) return;
+		
 		lastSpawn = Time.time;
 		spawnInterval = Random.Range(levelManager.leakSpawnMin, levelManager.leakSpawnMax);
 		
