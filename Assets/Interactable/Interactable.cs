@@ -71,7 +71,10 @@ public class Interactable : MonoBehaviour
 
     protected virtual void Update()
     {
-        CompletionTracking();
+        if (!FindObjectOfType<LevelManager>().gamePaused)
+        {
+            CompletionTracking();
+        }
         
         if (inAction && Input.GetButton("Jump"))
         {
