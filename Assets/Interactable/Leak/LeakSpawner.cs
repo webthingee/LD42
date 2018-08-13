@@ -78,7 +78,7 @@ public class LeakSpawner : MonoBehaviour
 
 		if (leakCount == 2)
 		{
-			FindObjectOfType<DialogManager>().DialogSayThis("Oh no, Another?!?!", 5f);
+			FindObjectOfType<DialogManager>().DialogSayThis("Oh no, another one?!?!", 5f);
 		}
 		
 		if (leakCount == 4)
@@ -88,7 +88,7 @@ public class LeakSpawner : MonoBehaviour
 		
 		if (leakCount == 6)
 		{
-			FindObjectOfType<DialogManager>().DialogSayThis("This is outa control!", 5f);
+			FindObjectOfType<DialogManager>().DialogSayThis("This is outta control!", 5f);
 		}
 		
 		leakCount++;
