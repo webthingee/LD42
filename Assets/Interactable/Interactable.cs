@@ -71,7 +71,7 @@ public class Interactable : MonoBehaviour
         
         if (inAction && Input.GetButton("Jump"))
         {
-            StartCoroutine(interactableInUse); 
+            StartCoroutine(interactableInUse);
         }
         else
         {
@@ -83,7 +83,7 @@ public class Interactable : MonoBehaviour
             CompletionHold();
         }
     }
-
+    
     private void CompletionHold()
     {
         if (TimeCheck())

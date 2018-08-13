@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetButtonDown("Jump"))
+		if (Input.GetKeyDown(KeyCode.N))
 		{
 			LoadGame();
 		}

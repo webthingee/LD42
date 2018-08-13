@@ -7,6 +7,10 @@ public class Lever : Interactable
 	public SpriteRenderer leverHandle;
 	public Sprite leverOn;
 	public Sprite leverOff;
+	public AudioEvent holdingLeverSound;
+	public AudioEvent releasingLeverSound;
+	
+	[SerializeField] private bool isHoldingLever;
 
 	protected override void Update()
 	{
@@ -34,15 +38,24 @@ public class Lever : Interactable
 		{
 			FindObjectOfType<LevelManager>().WinCanvas();
 		}
+
+		if (Input.GetButtonDown("Jump") && inAction && AllLeaksPatched())
+		{
+			if (!isHoldingLever)
+			{
+				holdingLeverSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+				isHoldingLever = true;
+			}
+		}
 		
 		if (Input.GetButtonUp("Jump") || !inAction )
 		{
-//			if (audioSource == null) 
-//				audioSource = FindObjectOfType<SoundManager>().GetOpenAudioSource();
-//
-//			audioSource.loop = true;
-//			blowtorch.Play(audioSource);
 			leverHandle.GetComponent<SpriteRenderer>().sprite = leverOff;
+			if (isHoldingLever)
+			{
+				releasingLeverSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+			}
+			isHoldingLever = false;
 		}
 	}
 	
@@ -70,7 +83,6 @@ public class Lever : Interactable
 			}
 			else
 			{
-				//StopCoroutine(degradeOverTime);
 				leverHandle.GetComponent<SpriteRenderer>().sprite = leverOn;
 				CompletionValue += positiveIncrease * Time.deltaTime;
 				percentageUI.ChangeValue(CompletionValue);

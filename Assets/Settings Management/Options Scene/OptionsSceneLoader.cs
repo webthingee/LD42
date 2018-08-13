@@ -8,6 +8,8 @@ public class OptionsSceneLoader : MonoBehaviour
 	/// Requires a Sound Manager to be in place within the scene
 	/// </summary>	
 	[SerializeField] public string optionsScene;
+
+	public bool optionSceneLoaded;
 	
 	private void Start()
 	{
@@ -20,10 +22,23 @@ public class OptionsSceneLoader : MonoBehaviour
 	private void Update()
 	{
 		// ReSharper disable once InvertIf
-		if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Q) || Input.GetKey(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (!SceneManager.GetSceneByName(optionsScene).IsValid())
+			if (!optionSceneLoaded)
+			{
 				SceneManager.LoadScene(optionsScene, LoadSceneMode.Additive);
+				optionSceneLoaded = true;
+				Time.timeScale = 0;
+				FindObjectOfType<LevelManager>().gamePaused = true;
+			}
+			else
+			{
+				SceneManager.UnloadSceneAsync(optionsScene);
+				optionSceneLoaded = false;
+				Time.timeScale = 1;
+				FindObjectOfType<LevelManager>().gamePaused = false;
+
+			}
 		}
 	}
 }

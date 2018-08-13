@@ -8,7 +8,12 @@ public class LevelManager : MonoBehaviour
 	public float leakSpawnMax;
 
 	public GameObject winCanvas;
+	public AudioEvent winSound;
+	
 	public GameObject loseCanvas;
+	public AudioEvent loseSound;
+
+	public bool gamePaused;
 
 	private void Awake()
 	{
@@ -37,12 +42,14 @@ public class LevelManager : MonoBehaviour
 	{
 		Time.timeScale = 0;
 		winCanvas.SetActive(true);
+		winSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
 	}
 	
 	public void LoseCanvas()
 	{
 		Time.timeScale = 0;
 		loseCanvas.SetActive(true);
+		loseSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
 	}
 
 	public void Restart()
