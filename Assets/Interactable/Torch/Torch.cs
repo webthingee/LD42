@@ -55,6 +55,9 @@ public class Torch : MonoBehaviour
 	
 	private void OnTriggerExit2D(Collider2D other)
 	{
-		if (isTorchable) isTorchable = false;
+		if (other.tag == tag)
+		{
+			if (isTorchable) isTorchable = false;
+		}
 	}
 }

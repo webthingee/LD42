@@ -36,20 +36,30 @@ public class LevelManager : MonoBehaviour
 		{
 			Restart();
 		}
+		
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			Application.Quit();
+			#if UNITY_EDITOR
+				UnityEditor.EditorApplication.isPlaying = false;
+			#endif
+		}
 	}
 
 	public void WinCanvas()
 	{
-		Time.timeScale = 0;
 		winCanvas.SetActive(true);
 		winSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+		GetComponent<TriggerMusic>().Stop();
+		Time.timeScale = 0;
 	}
 	
 	public void LoseCanvas()
 	{
-		Time.timeScale = 0;
 		loseCanvas.SetActive(true);
 		loseSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+		GetComponent<TriggerMusic>().Stop();
+		Time.timeScale = 0;
 	}
 
 	public void Restart()

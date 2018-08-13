@@ -13,6 +13,7 @@ public class SingleAudioEvent : AudioEvent
 		source.clip = clip;
 		source.volume = volume * AdjustVolume(audioType);
 		source.pitch = pitch;
+		source.loop = false;
 		source.Play();
 	}
 }

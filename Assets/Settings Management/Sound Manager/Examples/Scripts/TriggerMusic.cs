@@ -30,6 +30,6 @@ public class TriggerMusic : MonoBehaviour
 
 	public void Stop ()
 	{
-		audioSource.Stop();
+		if (audioSource) audioSource.Stop();
 	}
 }

@@ -15,7 +15,12 @@ public class Leak : Interactable
     protected override void Start()
     {
         if (startingSound)
-            startingSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+        {
+            var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+            aud.loop = false;
+            startingSound.Play(aud);
+        }
+        
         FindObjectOfType<CamShake>().shakeDuration = 0.3f;
     }
 

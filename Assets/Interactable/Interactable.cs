@@ -37,7 +37,11 @@ public class Interactable : MonoBehaviour
                 {
                     timeOccured = Time.time;
                     if (successSound)
+                    {
+                        var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+                        aud.loop = false;
                         successSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+                    }
                 }
                 
                 isComplete = true;

@@ -43,7 +43,9 @@ public class Lever : Interactable
 		{
 			if (!isHoldingLever)
 			{
-				holdingLeverSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+				var aud = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+				aud.loop = false;
+				holdingLeverSound.Play(aud);
 				isHoldingLever = true;
 			}
 		}
