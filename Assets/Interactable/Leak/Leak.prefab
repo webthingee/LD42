@@ -247,6 +247,7 @@ MonoBehaviour:
   rateOfIncrease: 1
   negitiveIncrease: 0.0025
   rateOfDecrease: 1
+  startingSound: {fileID: 11400000, guid: 709b7a6de41994f78a05cd16afdc7722, type: 2}
   inAction: 0
   isComplete: 0
   completionValue: 0

@@ -12,6 +12,13 @@ public class Leak : Interactable
         animator = GetComponent<Animator>();
     }
 
+    protected override void Start()
+    {
+        if (startingSound)
+            startingSound.Play(FindObjectOfType<SoundManager>().GetOpenAudioSource());
+        FindObjectOfType<CamShake>().shakeDuration = 0.3f;
+    }
+
     protected override void VisualCompletion()
     {
         base.VisualCompletion();
