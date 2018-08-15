@@ -4,25 +4,20 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour 
 {
 	public GameObject character;
-	Animator animator;
+	private Animator animator;
 	private CharacterMovement characterMovement;
+	private PlayerMovement playerMovement;
 
 	public AudioEvent footstep;
 	public float stepSpeed;
-	public AudioSource sm;
-	public bool walking;
+	private AudioSource walkingAudioSource;
 	private IEnumerator walkingSounds;
-
-	public float previousPosition;
-	[SerializeField] private bool hasFootsteps;
-	private PlayerMovement playerMovement;
+	[SerializeField] private bool hasStepAudio;
 	
 	public AudioEvent climbingSound;
-	[SerializeField] private bool hasClimbingSound;
+	private AudioSource climbingAudioSource;
 	private IEnumerator climbingSounds;
-	private AudioSource sm2;
-
-
+	[SerializeField] private bool hasClimbAudio;
 
 	private void Awake()
 	{
@@ -35,16 +30,17 @@ public class PlayerAnimation : MonoBehaviour
 
 	private void Update ()
 	{        
-		//float yAxis = Input.GetAxis("Vertical");
 		ChangeDirection(characterMovement.GetMoveDirection.x);
 
 		animator.SetFloat("Forward", Mathf.Abs(characterMovement.GetMoveDirection.x));
 		animator.SetBool("IsClimbing", ClimbCheck());
-		//anim.SetFloat("Looking", yAxis);
 
-		if (walking && (characterMovement.isGrounded || playerMovement.isClimbing))
+		if (Input.GetAxisRaw("Horizontal") != 0 && !playerMovement.ignoreOneWays)
 		{
 			StartWalking();
+			//@TODO player makes sound while bumping into walls.
+			// ALL "is walking" logic, probable in it's own script.
+			// maybe define is walking in other file, where move.x != 0 and isRight/Left is false?
 		}
 		else
 		{
@@ -59,94 +55,89 @@ public class PlayerAnimation : MonoBehaviour
 		{
 			StopClimbing();
 		}
-
-		previousPosition = transform.position.x;
-	}
-
-	private void LateUpdate()
-	{
-		walking = previousPosition != transform.position.x;
 	}
 
 	private bool ClimbCheck()
 	{
 		return playerMovement.isClimbing && characterMovement.GetMoveDirection != Vector3.zero;
 	}
-	
+
 	void ChangeDirection (float fdirection)
 	{        
 		if (fdirection > 0) character.transform.eulerAngles = new Vector3(0, 0, 0);
 		if (fdirection < 0) character.transform.eulerAngles = new Vector3(0, 180, 0);
 	}
-
+	
 	private void StartWalking ()
 	{
-		if (hasFootsteps) return;
-		hasFootsteps = true;
+		if (hasStepAudio) return;
+		hasStepAudio = true;
+		
 		StartCoroutine(walkingSounds);
 	}
 
 	private void StopWalking ()
 	{
+		if (!hasStepAudio) return;
+		hasStepAudio = false;
+		
 		StopCoroutine(walkingSounds);
-		
-		if (sm != null)
-		{
-			sm.Stop();
-			sm = null;
-		}
-		
-		hasFootsteps = false;
+
+		if (walkingAudioSource == null) return;
+		walkingAudioSource.Stop();
+		walkingAudioSource = null;
 	}
 
 	private IEnumerator WalkingSounds ()
 	{		
 		while (true)
 		{
-			hasFootsteps = true;
+			hasStepAudio = true;
 			
-			if (sm == null)
+			if (walkingAudioSource == null)
 			{
-				sm = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+				walkingAudioSource = FindObjectOfType<SoundManager>().GetOpenAudioSource();
 			}
 			
-			footstep.Play(sm);
-			yield return new WaitForSeconds(stepSpeed);
+			footstep.Play(walkingAudioSource);
+			yield return new WaitForSeconds(stepSpeed * 0.75f);
+			if (walkingAudioSource != null) walkingAudioSource.Stop();
+			yield return new WaitForSeconds(stepSpeed * 0.25f);
 		}
 	}
 	
 	private void StartClimbing ()
 	{
-		if (hasClimbingSound) return;
-		hasClimbingSound = true;
+		if (hasClimbAudio) return;
+		hasClimbAudio = true;
+		
 		StartCoroutine(climbingSounds);
 	}
 
 	private void StopClimbing ()
 	{
+		if (!hasClimbAudio) return;
+		hasClimbAudio = false;
+
 		StopCoroutine(climbingSounds);
 		
-		if (sm2 != null)
-		{
-			sm2.Stop();
-			sm2 = null;
-		}
-		
-		hasClimbingSound = false;
+		if (climbingAudioSource == null) return;
+		climbingAudioSource.Stop();
+		climbingAudioSource = null;
 	}
 	
 	private IEnumerator ClimbingSounds ()
 	{		
 		while (true)
 		{
-			hasClimbingSound = true;
+			hasClimbAudio = true;
 			
-			if (sm2 == null)
+			if (climbingAudioSource == null)
 			{
-				sm2 = FindObjectOfType<SoundManager>().GetOpenAudioSource();
+				climbingAudioSource = FindObjectOfType<SoundManager>().GetOpenAudioSource();
 			}
 			
-			climbingSound.Play(sm2);
+			climbingSound.Play(climbingAudioSource);
 			yield return new WaitForSeconds(stepSpeed);
 		}
 	}

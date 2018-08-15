@@ -8,7 +8,7 @@ public class PlayerMovement : CharacterMovement
     public bool isClimbing;
     public bool isUnderWater;
 
-    [SerializeField] private bool ignoreOneWays;
+    [SerializeField] public bool ignoreOneWays;
     [SerializeField] private float waterPenaltyX;
     [SerializeField] private float waterPenaltyY;
     
