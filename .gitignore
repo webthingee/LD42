@@ -7,6 +7,11 @@ Library/
 # ========================== #
 # Rider and Editor Generated #
 # ========================== #
+Builds/
+
+# ========================== #
+# Rider and Editor Generated #
+# ========================== #
 Assets/Plugins/Editor/*
 .idea/
 .vs/
